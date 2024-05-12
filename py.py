@@ -6,8 +6,8 @@ import random
 telegram_api_token = os.environ.get('TELEGRAM_API_TOKEN')
 telegram_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
 
-# 检查 Telegram 相关信息是否存在
-if telegram_api_token is None or telegram_chat_id is None:
+# 检查 Telegram 相关信息是否存在 or telegram_api_token is None or telegram_chat_id is None
+if False:
     print("Telegram API Token或聊天ID未设置。无法发送通知。")
     # 在这里可能进行其他处理或记录日志，因为无法发送通知
 else:
@@ -52,14 +52,14 @@ else:
 
                 if consecutive_failures == 3:
                     telegram_message = f"<b>Steps_modifier</b>\n\n账号： {account}\n连续三次失败"
-                    send_telegram_message(telegram_message)
+                    #send_telegram_message(telegram_message)
                     return {
                         'account': account,
                         'response': "Exceeded maximum consecutive failures"
                     }
             except Exception as e:
                 telegram_message = f"<b>Steps_modifier</b>\n\n账号： {account}\n错误： {str(e)}"
-                send_telegram_message(telegram_message)
+                #send_telegram_message(telegram_message)
 
         return {
             'account': account,
@@ -67,8 +67,8 @@ else:
         }
 
     if __name__ == "__main__":
-        min_steps = 50000
-        max_steps = 80000
+        min_steps = 15000
+        max_steps = 30000
 
         for account, password in account_password_pairs:
             result = modify_steps(account, password, min_steps, max_steps)
